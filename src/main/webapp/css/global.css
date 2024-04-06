@@ -67,12 +67,7 @@
 .modalTransOff{ /*Elimina solo la transparencia*/
     background-color: var(--colorRojito);
 }
-.dosBotones{
-    display: flex;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-around;
-}
+
 
 body {
   margin: 0;
@@ -122,6 +117,7 @@ body {
 
 #formRegUsuario {
     display: flex;
+    width: 100%;
     flex-direction: column;
     margin: 0 auto;
     align-items: center;
@@ -208,7 +204,7 @@ button:active{
     grid-template-rows: auto auto auto;
 
     grid-template-areas: 
-        "input input select"
+        "input input input"
         "table table table"
         ". cancelar ."
     ;
@@ -218,15 +214,12 @@ button:active{
     grid-area: input;
 }
 
-#selectFiltroUsu{
-    grid-area: select;
-}
 
 #tablaListaUsu{
     grid-area: table;
 }
 
-#btnCancelarListUsu{
+#contBotonesRegUsuario{
     grid-area: cancelar;
 }
 
@@ -242,9 +235,18 @@ button:active{
 #formListaUsuarios > table{
     width: 90%;
     overflow: scroll;
-    border-collapse: separate;
     text-align: center;
-}
-#formListaUsuarios > table > tr{
+    background-color: white;
+    border: 2px solid black;
+    
     cursor: pointer;
+}
+#modalLista{
+    display: none;
+}
+#modalEdicion{
+    display: none;
+}
+.auxFormaEdit input, .auxFormaEdit select{
+   margin: 1% auto;
 }
