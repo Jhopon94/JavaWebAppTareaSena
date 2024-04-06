@@ -250,3 +250,9 @@ button:active{
 .auxFormaEdit input, .auxFormaEdit select{
    margin: 1% auto;
 }
+#formListaUsuarios{
+    overflow-y: auto;
+}
+.filasTabla{
+    border-bottom: 1px solid black;
+}
