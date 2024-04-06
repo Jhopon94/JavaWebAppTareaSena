@@ -1,0 +1,250 @@
+@font-face{
+    font-family: 'Orbitron';
+    src:url('./fuentes/Orbitron-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face{
+    font-family: 'Orbitron-Bold';
+    src:url('./fuentes/Orbitron-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: bold;
+}
+@font-face{
+    font-family: 'Orbitron-Medium';
+    src:url('./fuentes/Orbitron-Medium.ttf') format('truetype');
+    font-weight: medium;
+    font-style: medium;
+}
+@font-face{
+    font-family: 'Orbitron-Black';
+    src:url('./fuentes/Orbitron-Black.ttf') format('truetype');
+    font-weight: black;
+    font-style: black;
+}
+
+:root{
+    --colorRojito: #fd593f;
+    --colorYomu: #00fcd2;
+    --colorAzulito: #1486C9;
+    --colorMoradito: #3c7596;
+    --fuenteOrbitronRegular: 'Orbitron', Orbitron;
+    --fuenteOrbitronMedium: 'Orbitron-Medium', Orbitron-Medium;
+    --fuenteOrbitronBlack: 'Orbitron-Black', Orbitron-Black;
+    --fuenteOrbitronBold: 'Orbitron-Bold', Orbitron-Bold;
+}
+.tresBotones{
+    display: flex;
+    flex: 1 0 50%;
+    margin: 0 auto;
+    justify-content: space-around;
+}
+.auxTresBotones{
+    flex:1 0 100%;
+    height: 7vh;
+}
+.modalTransparencia {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal {
+    background-color:var(--colorYomu);
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    max-width: 80%;
+    max-height: 80%;
+    overflow: auto;
+  }
+  
+.modalTransOff{ /*Elimina solo la transparencia*/
+    background-color: var(--colorRojito);
+}
+.dosBotones{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--colorRojito);
+}
+.btnGeneral{
+    width: 25vw;
+    height: 18vh;
+    background-color: transparent;
+    border-color: var(--colorYomu);
+    border-radius: 12px;
+    border-width: 7px;
+    font-family: var(--fuenteOrbitronMedium);
+    font-size: 38px;
+    overflow: hidden;
+    color: var(--colorYomu);
+    cursor: pointer;
+}
+.btnGeneral:active{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+#contenedorPrincipalUsuarios {
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 45vh auto;
+}
+#contenedorBotonesUsuarios {
+    width: 100%;
+    height: 100%;
+
+    /*flexbox*/
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: space-evenly;
+}
+.inputModalRegUsuario {
+    font-family: var(--fuenteOrbitronRegular);
+    width: 90%;
+    margin-top: 3vh;
+}
+
+#formRegUsuario {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    align-items: center;
+}
+
+#contBotonesRegUsuario {
+    display: flex;
+    margin: 0 auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#btnRegistrarUsuDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 6vw;
+}
+
+#btnCancelRegUsuDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 6vw;
+}
+#formRegUsuario > input, select{
+    border-radius: 12px;
+    text-align: center;
+    font-size: xx-large;
+    margin-bottom: 10vh;
+}
+.btnFoto{
+    background-color: white;
+    height: 120px;
+    width: 120px;
+    cursor: pointer;
+}
+.btnRegistrar, .btnGuardar, .btnEditar, .btnAgregar, .btnContinuar, .btnAceptar, .btnMarcarEntregado{
+    background-color: var(--colorAzulito);
+    color: white;
+    height: 60px;
+    width: 250px;
+    overflow: hidden;
+    border-width: 1px;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+}
+.btnCancelar, .btnEliminar, .btnAtras{
+    background-color: var(--colorRojito);
+    color: white;
+    height: 60px;
+    width: 250px;
+    overflow: hidden;
+    border-width: 1px;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+}
+button{
+    font-family: var(--fuenteOrbitronRegular);
+    font-size: xx-large;
+}
+button:active{
+    box-shadow: inset 2px 2px 10px black;
+}
+.clicOff{
+    cursor: auto;
+    background-color: lightgray;
+}
+.clicOff:active{
+    box-shadow: none;
+}
+.btnMarcarEntregado{
+    width: 100%;
+}
+#modalRegistro{
+    display: none;
+}
+#formListaUsuarios{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto auto;
+
+    grid-template-areas: 
+        "input input select"
+        "table table table"
+        ". cancelar ."
+    ;
+}
+
+#inputFiltroUsu{
+    grid-area: input;
+}
+
+#selectFiltroUsu{
+    grid-area: select;
+}
+
+#tablaListaUsu{
+    grid-area: table;
+}
+
+#btnCancelarListUsu{
+    grid-area: cancelar;
+}
+
+.formListaUsuChilds{
+    font-size: xx-large;
+    border-radius: 12px;
+    font-family: var(--fuenteOrbitronRegular);
+    margin-bottom: 3vh;
+    margin-right: 2vw;
+
+}
+
+#formListaUsuarios > table{
+    width: 90%;
+    overflow: scroll;
+    border-collapse: separate;
+    text-align: center;
+}
+#formListaUsuarios > table > tr{
+    cursor: pointer;
+}
