@@ -49,6 +49,17 @@ public class SvUsuarios extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        //////// Eliminación//////////////////////////////
+        
+        String eliminar = request.getParameter("eliminar");
+        if (eliminar != null) {
+            doDelete(request, response);
+        }
+
+        ///////////////////////////////////////////////////
+        
+        else{
+        
         String nombre = request.getParameter("nombre");
         String tipoUsuario = request.getParameter("tipoUsuario");
         String pass = request.getParameter("pass");
@@ -68,7 +79,28 @@ public class SvUsuarios extends HttpServlet {
         miSesion.setAttribute("nombre", usuarioDAO.getResultadoOperacion());
 
         response.sendRedirect("index.jsp");
-        //processRequest(request, response);
+        }
+        
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String nombre = request.getParameter("eliminar");
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        usuarioDAO.eliminarUsuario(nombre);
+        System.out.println("Eliminado USaurio " + nombre);
+        
+        List<Usuario> listaUsuarios = usuarioDAO.obtenerUsuarios();
+        
+        HttpSession miSesion = request.getSession();
+        miSesion.setAttribute("activarModalLista", true);
+        miSesion.setAttribute("eliminacion", true);
+        miSesion.setAttribute("listaUsuarios", listaUsuarios);
+        miSesion.setAttribute("nombre", usuarioDAO.getMensajeEliminacion());
+
+        response.sendRedirect("index.jsp");
     }
 
     @Override

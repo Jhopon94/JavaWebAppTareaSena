@@ -4,7 +4,7 @@ let textoBtn = 'Editar';
 function ManejarClicLista(nombre, tipoUsuario, pass){
     
 
-    let inputNombre = document.getElementById('inputNombre');
+    let inputNombre = document.getElementById('inputNombreEdicion');
     let selecTipo = document.getElementById('listaTipo');
     let inputPass = document.getElementById('inputPass');
     
@@ -12,12 +12,11 @@ function ManejarClicLista(nombre, tipoUsuario, pass){
     console.log(tipoUsuario);
     selecTipo.querySelector('option[value="' + tipoUsuario + '"]').selected = true;
     inputPass.value= pass;
-    AbrirModalEdicion();
+    AbrirModalEdicion(nombre);
 }
 
 function ActivarEdicion() {
 
-    let inputNombre = document.getElementById("inputNombre");
     let listaTipo = document.getElementById("listaTipo");
     let inputPass = document.getElementById("inputPass");
     let btnEliminar = document.getElementById("btnEliminar");
@@ -27,7 +26,6 @@ function ActivarEdicion() {
 
     modoEdicion = true;
 
-    inputNombre.disabled = true; //No se puede edditar
     listaTipo.disabled = false;
     inputPass.disabled = false;
     btnEliminar.disabled = false;
@@ -40,7 +38,7 @@ function ActivarEdicion() {
 
 function ManejarCancelar() {
 
-    let inputNombre = document.getElementById("inputNombre");
+    let inputNombre = document.getElementById("inputNombreEdicion");
     let listaTipo = document.getElementById("listaTipo");
     let inputPass = document.getElementById("inputPass");
     let btnEliminar = document.getElementById("btnEliminar");
@@ -63,6 +61,20 @@ function ManejarCancelar() {
     CerrarModalEdicion();
 }
 
+function ManejarEliminar(){
+    
+    var inputNombreEdicion = document.getElementById("inputNombreEdicion");
+    var contenido = inputNombreEdicion.value;
+    var form = document.getElementById('formEditUsuario');
+    var input = document.createElement('input');
+    
+    input.type = 'hidden';
+    input.name = 'eliminar';
+    input.value = contenido;
+    form.appendChild(input);
+    form.submit();
+}
+
 function AbrirModalRegistro() {
     var modalRegistro = document.getElementById("modalRegistro");
     modalRegistro.style.display = "flex";
@@ -83,8 +95,10 @@ function CerrarModalLista() {
     modalRegistro.style.display = "none";
 }
 
-function AbrirModalEdicion() {
+function AbrirModalEdicion(nombre) {
     var modalRegistro = document.getElementById("modalEdicion");
+    var inputNombreEdicion = document.getElementById("inputNombreEdicion");
+    inputNombreEdicion.setAttribute("name", nombre);
     modalRegistro.style.display = "flex";
 }
 

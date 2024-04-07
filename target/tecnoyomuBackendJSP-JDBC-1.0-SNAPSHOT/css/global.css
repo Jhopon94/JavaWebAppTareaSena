@@ -115,7 +115,7 @@ body {
     margin-top: 3vh;
 }
 
-#formRegUsuario {
+.formRegUsuario {
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -144,7 +144,7 @@ body {
     align-items: center;
     padding: 0 6vw;
 }
-#formRegUsuario > input, select{
+.formRegUsuario > input, select{
     border-radius: 12px;
     text-align: center;
     font-size: xx-large;

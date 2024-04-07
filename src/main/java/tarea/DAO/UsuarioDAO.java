@@ -18,6 +18,7 @@ public class UsuarioDAO {
     private String password;
 
     String resultadoOperacion;
+    String mensajeEliminacion;
 
     public UsuarioDAO() {
         try {
@@ -29,15 +30,13 @@ public class UsuarioDAO {
             user = prop.getProperty("db.username");
             password = prop.getProperty("db.password");
 
-            System.out.println(url);
-            System.out.println(user);
-            System.out.println(password);
-
             // Cargar el driver de MySQL
             Class.forName("com.mysql.jdbc.Driver");
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
+        mensajeEliminacion = "Eliminación Exitosa!";
     }
 
     public void crearUsuario(Usuario usuario) {
@@ -48,11 +47,11 @@ public class UsuarioDAO {
                 pstmt.setString(2, usuario.getTipoUsuario());
                 pstmt.setString(3, usuario.getPass());
                 pstmt.executeUpdate();
-                resultadoOperacion = "Operación Exitosa!";
+                resultadoOperacion = "Usuario Registrado!";
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            resultadoOperacion = "Operación Fallida !";
+            resultadoOperacion = "Registro Fallido!";
         }
     }
 
@@ -69,12 +68,12 @@ public class UsuarioDAO {
                         usuario.setPass(rs.getString("pass"));
                         usuarios.add(usuario);
                     }
-                    resultadoOperacion = "Operación Exitosa!";
+                    resultadoOperacion = "Búsqueda Exitosa!";
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            resultadoOperacion = "Operación Fallida !";
+            resultadoOperacion = "Registro Fallido!";
         }
         return usuarios;
     }
@@ -87,11 +86,11 @@ public class UsuarioDAO {
                 pstmt.setString(2, usuario.getPass());
                 pstmt.setString(3, usuario.getNombre());
                 pstmt.executeUpdate();
-                resultadoOperacion = "Operación Exitosa!";
+                resultadoOperacion = "Actualización Exitosa!";
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            resultadoOperacion = "Operación Fallida !";
+            resultadoOperacion = "Actualización Fallida !";
         }
     }
 
@@ -101,17 +100,20 @@ public class UsuarioDAO {
             try (PreparedStatement pstmt = conn.prepareStatement(query)) {
                 pstmt.setString(1, nombreUsuario);
                 pstmt.executeUpdate();
-                resultadoOperacion = "Operación Exitosa!";
+                resultadoOperacion = "Usuario Eliminado!";
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            resultadoOperacion = "Operación Fallida !";
+            resultadoOperacion = "Eliminación Fallida !";
         }
     }
 
     public String getResultadoOperacion() {
         return resultadoOperacion;
     }
-;
+    
+    public String getMensajeEliminacion(){
+        return mensajeEliminacion;
+    }
 
 }

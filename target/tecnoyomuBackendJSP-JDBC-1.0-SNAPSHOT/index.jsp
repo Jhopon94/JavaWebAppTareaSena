@@ -17,6 +17,7 @@
 
         <% boolean activarModalRegistro = false; %>
         <% boolean activarModalLista = false;%>
+        <% boolean eliminacion = false; %>
         <% String nombreUsuario = ""; %>
         <% List<Usuario> listaUsuarios = new ArrayList<>(); %>
         <% if(request.getSession().getAttribute("activarModalRegistro") != null){
@@ -32,12 +33,26 @@
                 
                 boolean aux = (boolean)request.getSession().getAttribute("activarModalLista");
                 if(aux){
-                activarModalLista = true;
-                listaUsuarios = (ArrayList) request.getSession().getAttribute("listaUsuarios");
+                    activarModalLista = true;
+                    listaUsuarios = (ArrayList) request.getSession().getAttribute("listaUsuarios");
+                        
+                    if(request.getSession().getAttribute("eliminacion") != null){
+                         System.out.println("eliminacion no es null");
+                         boolean auxDelete = (boolean)request.getSession().getAttribute("eliminacion");
+                         nombreUsuario = (String) request.getSession().getAttribute("nombre");
+                         if(auxDelete) eliminacion = true;
+                         else eliminacion = false;
+                     }else{
+                    System.out.println("Eliminacion es null");
+                     }
+                    
+                    request.getSession().invalidate();
+                     }
+            } %>
+        <%
                 
-                request.getSession().invalidate();
-                }
-            }; %>
+                
+        %>
 
     </head>
     <body>
@@ -70,7 +85,7 @@
 
         <div class="modalTransparencia" id="modalRegistro">
             <div class="modal">
-                <form id='formRegUsuario' action="Usuarios" method="POST">
+                <form id='formRegUsuario' class="formRegUsuario" action="Usuarios" method="POST">
                     <input class="inputModalRegUsuario"  placeholder="Nombre de Usuario" name="nombre" required/>
                     <select class="inputModalRegUsuario" name="tipoUsuario" required>
                         <option value="" >Selecciona Tipo de Usuario</option>
@@ -101,9 +116,9 @@
 
         <div class="modalTransparencia" id="modalLista">
             <div class="modal">
-                <form id='formListaUsuarios'>
+                <div id='formListaUsuarios'>
                     <table class='formListaUsuChilds' id="tablaListaUsu" >
-                        
+
                         <%
                         int contador = 1;
                         for(Usuario usu : listaUsuarios){
@@ -121,7 +136,7 @@
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
 
@@ -129,8 +144,8 @@
 
         <div class="modalTransparencia" id="modalEdicion">
             <div class="modal">
-                <div id='formRegUsuario' class="auxFormaEdit">
-                    <input id="inputNombre" class="inputModalRegUsuario"  placeholder="Nombre de Usuario" disabled/>
+                <form id='formEditUsuario' class="auxFormaEdit formRegUsuario" action="Usuarios" method="POST">
+                    <input id="inputNombreEdicion" class="inputModalRegUsuario"  disabled/>
                     <select id="listaTipo" class="inputModalRegUsuario" disabled>
                         <option value="" >Selecciona Tipo de Usuario</option>
                         <option value="administrador" >Administrador</option>
@@ -141,22 +156,22 @@
                     <div id='contBotonesRegUsuario'>
                         <div id="btnRegistrarUsuDiv">
                             <div>
-                                <button id="btnEditar" class="btnRegistrar" onclick="ActivarEdicion()">Editar</button>
+                                <button id="btnEditar" type="button" class="btnRegistrar" onclick="ActivarEdicion()">Editar</button>
                             </div>
                         </div>
                         <div id="btnGuardarUsuDiv">
                             <div>
-                                <button id="btnGuardar" class="btnRegistrar clicOff" onclick="ActivarEdicion()" disabled>Guardar</button>
+                                <button id="btnGuardar" type="button" class="btnRegistrar clicOff" onclick="ActivarEdicion()" disabled>Guardar</button>
                             </div>
                             <div>
-                                <button id="btnEliminar" class="btnCancelar clicOff" disabled>Eliminar</button>
+                                <button id="btnEliminar" type="button" class="btnCancelar clicOff" onclick="ManejarEliminar()" disabled>Eliminar</button>
                             </div>
                             <div>
-                                <button id="btnCancelar" class="btnCancelar" onclick="ManejarCancelar()">Cancelar</button>
+                                <button id="btnCancelar" type="button" class="btnCancelar" onclick="ManejarCancelar()">Cancelar</button>
                             </div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -165,21 +180,27 @@
     <script src="./funciones.js"></script>  
     <script>
                                     window.onload = function () {
-                                      
-                                        let activarModalDesdeRegistro = '<%= activarModalRegistro %>'; 
+
+                                        let activarModalDesdeRegistro = '<%= activarModalRegistro %>';
                                         let nombreUsuario = '<%= nombreUsuario %>';
-                                        if(activarModalDesdeRegistro === "true"){
+                                        if (activarModalDesdeRegistro === "true") {
                                             console.log("abriendo modal");
                                             alert(nombreUsuario);
                                         }
-                                        
-                                        let activarModalDesdeLista = '<%= activarModalLista %>'; 
-                                        if(activarModalDesdeLista === "true"){
+
+                                        let activarModalDesdeLista = '<%= activarModalLista %>';
+                                        let eliminacion = '<%= eliminacion %>';
+                                        if (activarModalDesdeLista === "true") {
                                             console.log("abriendo modal lista Usuarios");
                                             AbrirModalLista();
+                                            if (eliminacion === "true") {
+                                                alert(nombreUsuario);
+                                            } else {
+                                                console.log("No se va a mostrar alert");
+                                            }
                                         }
-                                        
-                                        
+
+
                                     };
     </script>
 </html>
