@@ -12,6 +12,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import tarea.DAO.UsuarioDAO;
 import tarea.clases.Usuario;
 
 /**
@@ -20,52 +22,58 @@ import tarea.clases.Usuario;
  */
 @WebServlet(name = "SvUsuarios", urlPatterns = {"/Usuarios"})
 public class SvUsuarios extends HttpServlet {
-    
-    //////////// Array de Usuarios /////////////////////////////////
-    private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 
+    //////////// Array de Usuarios /////////////////////////////////
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-     
+
     }
 
- 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+
+        List<Usuario> listaUsuarios = usuarioDAO.obtenerUsuarios();
+
         HttpSession miSesion = request.getSession();
         miSesion.setAttribute("listaUsuarios", listaUsuarios);
         miSesion.setAttribute("activarModalLista", true);
-        
-        response.sendRedirect("index.jsp");
-       // processRequest(request, response);
-    }
 
+        response.sendRedirect("index.jsp");
+        // processRequest(request, response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-            String nombre = request.getParameter("nombre");
-            String tipoUsuario = request.getParameter("tipoUsuario");
-            String pass = request.getParameter("pass");
-            
-            listaUsuarios.add(new Usuario(nombre, tipoUsuario, pass));
-            System.out.println("Agregado: " + nombre);
-            
-            HttpSession miSesion = request.getSession();
-            miSesion.setAttribute("activarModalRegistro", true);
-            miSesion.setAttribute("nombre", nombre);
-        
-            response.sendRedirect("index.jsp");
+
+        String nombre = request.getParameter("nombre");
+        String tipoUsuario = request.getParameter("tipoUsuario");
+        String pass = request.getParameter("pass");
+
+        Usuario usuario = new Usuario();
+        usuario.setNombre(nombre);
+        usuario.setTipoUsuario(tipoUsuario);
+        usuario.setPass(pass);
+
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        usuarioDAO.crearUsuario(usuario);
+
+        System.out.println(usuarioDAO.getResultadoOperacion());
+
+        HttpSession miSesion = request.getSession();
+        miSesion.setAttribute("activarModalRegistro", true);
+        miSesion.setAttribute("nombre", usuarioDAO.getResultadoOperacion());
+
+        response.sendRedirect("index.jsp");
         //processRequest(request, response);
     }
 
     @Override
     public String getServletInfo() {
-        
-        
+
         return "Short description";
     }// </editor-fold>
 

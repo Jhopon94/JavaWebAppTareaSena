@@ -1,4 +1,5 @@
 tarea\tecnoyomubackendjsp\jdbc\JakartaRestConfiguration.class
 tarea\clases\Usuario.class
 tarea\tecnoyomubackendjsp\jdbc\resources\JakartaEE10Resource.class
+tarea\DAO\UsuarioDAO.class
 tarea\servlets\SvUsuarios.class

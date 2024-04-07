@@ -3,20 +3,16 @@ let textoBtn = 'Editar';
 
 function ManejarClicLista(nombre, tipoUsuario, pass){
     
-    
-     /*      
-    let celda = filaImportada.getElementsByTagName('td')[0];
-    let textoCelda = celda.innerText;
-    console.log(textoCelda);
-    */
+
     let inputNombre = document.getElementById('inputNombre');
     let selecTipo = document.getElementById('listaTipo');
     let inputPass = document.getElementById('inputPass');
     
-    console.log(nombre + " " + tipoUsuario + " " + pass);
-    
-    /*inputNombre.value = 
-    AbrirModalEdicion();*/
+    inputNombre.value = nombre;
+    console.log(tipoUsuario);
+    selecTipo.querySelector('option[value="' + tipoUsuario + '"]').selected = true;
+    inputPass.value= pass;
+    AbrirModalEdicion();
 }
 
 function ActivarEdicion() {
@@ -31,7 +27,7 @@ function ActivarEdicion() {
 
     modoEdicion = true;
 
-    inputNombre.disabled = false;
+    inputNombre.disabled = true; //No se puede edditar
     listaTipo.disabled = false;
     inputPass.disabled = false;
     btnEliminar.disabled = false;

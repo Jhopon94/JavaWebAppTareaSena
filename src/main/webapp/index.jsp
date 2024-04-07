@@ -4,6 +4,7 @@
     Author     : Jhopon
 --%>
 <%@page import="java.util.ArrayList" %>
+<%@page import="java.util.List" %>
 <%@page import="tarea.clases.Usuario" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,7 +18,7 @@
         <% boolean activarModalRegistro = false; %>
         <% boolean activarModalLista = false;%>
         <% String nombreUsuario = ""; %>
-        <% ArrayList<Usuario> listaUsuarios = new ArrayList<>(); %>
+        <% List<Usuario> listaUsuarios = new ArrayList<>(); %>
         <% if(request.getSession().getAttribute("activarModalRegistro") != null){
                 boolean aux = (boolean)request.getSession().getAttribute("activarModalRegistro");
                 if(aux){
@@ -101,7 +102,6 @@
         <div class="modalTransparencia" id="modalLista">
             <div class="modal">
                 <form id='formListaUsuarios'>
-                    <input class='formListaUsuChilds' id='inputFiltroUsu' />
                     <table class='formListaUsuChilds' id="tablaListaUsu" >
                         
                         <%
@@ -132,10 +132,10 @@
                 <div id='formRegUsuario' class="auxFormaEdit">
                     <input id="inputNombre" class="inputModalRegUsuario"  placeholder="Nombre de Usuario" disabled/>
                     <select id="listaTipo" class="inputModalRegUsuario" disabled>
-                        <option value="opcionCeroTipoUsu" >Selecciona Tipo de Usuario</option>
-                        <option value="tipoUsu1" >Administrador</option>
-                        <option value="tipoUsu1" >Contador</option>
-                        <option value="tipoUsu1" >Reparador</option>
+                        <option value="" >Selecciona Tipo de Usuario</option>
+                        <option value="administrador" >Administrador</option>
+                        <option value="contador" >Contador</option>
+                        <option value="reparador" >Reparador</option>
                     </select>
                     <input id="inputPass" placeholder='Asignar Contraseña' class="inputModalRegUsuario" disabled >
                     <div id='contBotonesRegUsuario'>
@@ -170,7 +170,7 @@
                                         let nombreUsuario = '<%= nombreUsuario %>';
                                         if(activarModalDesdeRegistro === "true"){
                                             console.log("abriendo modal");
-                                            alert("Usuario " + nombreUsuario + " agregado correctamente!");
+                                            alert(nombreUsuario);
                                         }
                                         
                                         let activarModalDesdeLista = '<%= activarModalLista %>'; 

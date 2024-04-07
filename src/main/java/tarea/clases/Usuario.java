@@ -12,11 +12,11 @@ public class Usuario {
     
     private String nombre, tipoUsuario, pass;
     
-    public Usuario(String nombre, String tipoUsuario, String pass){
+    public Usuario(){
     
-        this.nombre = nombre;
-        this.tipoUsuario = tipoUsuario;
-        this.pass = pass;
+        this.nombre = "";
+        this.tipoUsuario = "";
+        this.pass = "";
     }
     
     public String getNombre(){
@@ -28,13 +28,13 @@ public class Usuario {
     public String getPass(){
         return pass;
     }
-    public void setNombre(){
-    
+    public void setNombre(String nombre){
+        this.nombre = nombre;
     }
-    public void setTipoUsuario(){
-    
+    public void setTipoUsuario(String tipoUsuario){
+        this.tipoUsuario = tipoUsuario;
     }
-    public void setPass(){
-    
+    public void setPass(String pass){
+        this.pass = pass;
     }
 }
