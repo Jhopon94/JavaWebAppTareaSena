@@ -18,6 +18,7 @@
         <% boolean activarModalRegistro = false; %>
         <% boolean activarModalLista = false;%>
         <% boolean eliminacion = false; %>
+        <% boolean edicion = false; %>
         <% String nombreUsuario = ""; %>
         <% List<Usuario> listaUsuarios = new ArrayList<>(); %>
         <% if(request.getSession().getAttribute("activarModalRegistro") != null){
@@ -42,6 +43,16 @@
                          nombreUsuario = (String) request.getSession().getAttribute("nombre");
                          if(auxDelete) eliminacion = true;
                          else eliminacion = false;
+                     }else{
+                    System.out.println("Eliminacion es null");
+                     }
+                     
+                     if(request.getSession().getAttribute("edicion") != null){
+                         System.out.println("edicion no es null");
+                         boolean auxEdicion = (boolean)request.getSession().getAttribute("edicion");
+                         nombreUsuario = (String) request.getSession().getAttribute("nombre");
+                         if(auxEdicion) edicion = true;
+                         else edicion = false;
                      }else{
                     System.out.println("Eliminacion es null");
                      }
@@ -146,13 +157,13 @@
             <div class="modal">
                 <form id='formEditUsuario' class="auxFormaEdit formRegUsuario" action="Usuarios" method="POST">
                     <input id="inputNombreEdicion" class="inputModalRegUsuario"  disabled/>
-                    <select id="listaTipo" class="inputModalRegUsuario" disabled>
+                    <select id="listaTipo" class="inputModalRegUsuario" name="tipoUsuEdicion" disabled>
                         <option value="" >Selecciona Tipo de Usuario</option>
                         <option value="administrador" >Administrador</option>
                         <option value="contador" >Contador</option>
                         <option value="reparador" >Reparador</option>
                     </select>
-                    <input id="inputPass" placeholder='Asignar Contraseña' class="inputModalRegUsuario" disabled >
+                    <input id="inputPass" placeholder='Asignar Contraseña' class="inputModalRegUsuario" name="passEdicion" disabled >
                     <div id='contBotonesRegUsuario'>
                         <div id="btnRegistrarUsuDiv">
                             <div>
@@ -161,7 +172,7 @@
                         </div>
                         <div id="btnGuardarUsuDiv">
                             <div>
-                                <button id="btnGuardar" type="button" class="btnRegistrar clicOff" onclick="ActivarEdicion()" disabled>Guardar</button>
+                                <button id="btnGuardar" type="button" class="btnRegistrar clicOff" onclick="ManejarEditar()" disabled>Guardar</button>
                             </div>
                             <div>
                                 <button id="btnEliminar" type="button" class="btnCancelar clicOff" onclick="ManejarEliminar()" disabled>Eliminar</button>
@@ -190,13 +201,19 @@
 
                                         let activarModalDesdeLista = '<%= activarModalLista %>';
                                         let eliminacion = '<%= eliminacion %>';
+                                        let edicion = '<%= edicion %>';
                                         if (activarModalDesdeLista === "true") {
                                             console.log("abriendo modal lista Usuarios");
                                             AbrirModalLista();
                                             if (eliminacion === "true") {
                                                 alert(nombreUsuario);
                                             } else {
-                                                console.log("No se va a mostrar alert");
+                                                console.log("No se va a mostrar alert eliminacion");
+                                            }
+                                            if (edicion === "true") {
+                                                alert(nombreUsuario);
+                                            } else {
+                                                console.log("No se va a mostrar alert edicion");
                                             }
                                         }
 

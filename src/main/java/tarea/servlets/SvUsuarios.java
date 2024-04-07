@@ -58,6 +58,15 @@ public class SvUsuarios extends HttpServlet {
 
         ///////////////////////////////////////////////////
         
+        //////// Edición//////////////////////////////
+        
+        String editar = request.getParameter("editar");
+        if (editar != null) {
+            doPut(request, response);
+        }
+
+        ///////////////////////////////////////////////////
+        
         else{
         
         String nombre = request.getParameter("nombre");
@@ -99,6 +108,34 @@ public class SvUsuarios extends HttpServlet {
         miSesion.setAttribute("eliminacion", true);
         miSesion.setAttribute("listaUsuarios", listaUsuarios);
         miSesion.setAttribute("nombre", usuarioDAO.getMensajeEliminacion());
+
+        response.sendRedirect("index.jsp");
+    }
+    
+    @Override
+    protected void doPut(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    
+        String nombre = request.getParameter("editar");
+        String tipoUsuario = request.getParameter("tipoUsuEdicion");
+        String pass = request.getParameter("passEdicion");
+
+        Usuario usuario = new Usuario();
+        usuario.setNombre(nombre);
+        usuario.setTipoUsuario(tipoUsuario);
+        usuario.setPass(pass);
+        
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        usuarioDAO.actualizarUsuario(usuario);
+        System.out.println("Actualizado Usuario " + nombre);
+        
+        List<Usuario> listaUsuarios = usuarioDAO.obtenerUsuarios();
+        
+        HttpSession miSesion = request.getSession();
+        miSesion.setAttribute("activarModalLista", true);
+        miSesion.setAttribute("edicion", true);
+        miSesion.setAttribute("listaUsuarios", listaUsuarios);
+        miSesion.setAttribute("nombre", usuarioDAO.getMensajeEdicion());
 
         response.sendRedirect("index.jsp");
     }

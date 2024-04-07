@@ -19,6 +19,7 @@ public class UsuarioDAO {
 
     String resultadoOperacion;
     String mensajeEliminacion;
+    String mensajeEdicion;
 
     public UsuarioDAO() {
         try {
@@ -37,6 +38,7 @@ public class UsuarioDAO {
         }
         
         mensajeEliminacion = "Eliminación Exitosa!";
+        mensajeEdicion = "Actualización Exitosa!";
     }
 
     public void crearUsuario(Usuario usuario) {
@@ -114,6 +116,10 @@ public class UsuarioDAO {
     
     public String getMensajeEliminacion(){
         return mensajeEliminacion;
+    }
+    
+    public String getMensajeEdicion(){
+        return mensajeEdicion;
     }
 
 }

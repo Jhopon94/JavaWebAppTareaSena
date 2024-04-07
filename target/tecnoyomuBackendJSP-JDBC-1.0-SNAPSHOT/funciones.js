@@ -74,6 +74,20 @@ function ManejarEliminar(){
     form.appendChild(input);
     form.submit();
 }
+function ManejarEditar(){
+    
+    var inputNombreEdicion = document.getElementById("inputNombreEdicion");
+    var contenido = inputNombreEdicion.value;
+    console.log(contenido);
+    var form = document.getElementById('formEditUsuario');
+    var input = document.createElement('input');
+    
+    input.type = 'hidden';
+    input.name = 'editar';
+    input.value = contenido;
+    form.appendChild(input);
+    form.submit();
+}
 
 function AbrirModalRegistro() {
     var modalRegistro = document.getElementById("modalRegistro");
