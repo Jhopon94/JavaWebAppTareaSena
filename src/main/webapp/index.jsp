@@ -43,8 +43,6 @@
                          nombreUsuario = (String) request.getSession().getAttribute("nombre");
                          if(auxDelete) eliminacion = true;
                          else eliminacion = false;
-                     }else{
-                    System.out.println("Eliminacion es null");
                      }
                      
                      if(request.getSession().getAttribute("edicion") != null){
@@ -53,8 +51,6 @@
                          nombreUsuario = (String) request.getSession().getAttribute("nombre");
                          if(auxEdicion) edicion = true;
                          else edicion = false;
-                     }else{
-                    System.out.println("Eliminacion es null");
                      }
                     
                     request.getSession().invalidate();

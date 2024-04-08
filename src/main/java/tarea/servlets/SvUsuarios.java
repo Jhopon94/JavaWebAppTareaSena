@@ -51,8 +51,10 @@ public class SvUsuarios extends HttpServlet {
 
         //////// Eliminación//////////////////////////////
         
+        String editar = request.getParameter("editar");
         String eliminar = request.getParameter("eliminar");
         if (eliminar != null) {
+            System.out.println("vamos a eliminar");
             doDelete(request, response);
         }
 
@@ -60,15 +62,15 @@ public class SvUsuarios extends HttpServlet {
         
         //////// Edición//////////////////////////////
         
-        String editar = request.getParameter("editar");
-        if (editar != null) {
+        else if(editar != null) {
+            System.out.println("vamos a editar");
             doPut(request, response);
         }
 
         ///////////////////////////////////////////////////
         
         else{
-        
+        System.out.println("ni a eliminar ni a editar");
         String nombre = request.getParameter("nombre");
         String tipoUsuario = request.getParameter("tipoUsuario");
         String pass = request.getParameter("pass");

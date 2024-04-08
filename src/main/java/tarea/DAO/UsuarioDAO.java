@@ -75,7 +75,7 @@ public class UsuarioDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            resultadoOperacion = "Registro Fallido!";
+            resultadoOperacion = "Búsqueda Fallido!";
         }
         return usuarios;
     }
@@ -120,6 +120,8 @@ public class UsuarioDAO {
     
     public String getMensajeEdicion(){
         return mensajeEdicion;
+
     }
+
 
 }
