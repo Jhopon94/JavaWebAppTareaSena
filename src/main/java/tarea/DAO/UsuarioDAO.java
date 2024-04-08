@@ -24,7 +24,7 @@ public class UsuarioDAO {
     public UsuarioDAO() {
         try {
             Properties prop = new Properties();
-            InputStream input = getClass().getClassLoader().getResourceAsStream("config.properties");
+            InputStream input = getClass().getClassLoader().getResourceAsStream("configProd.properties");
             prop.load(input);
 
             url = prop.getProperty("db.url");
